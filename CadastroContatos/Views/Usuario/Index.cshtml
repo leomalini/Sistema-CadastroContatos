@@ -1,0 +1,102 @@
+﻿@model List<UsuarioModel>
+@{
+    ViewData["Title"] = "Listagem de Usuários";
+}
+<div class="text-center">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" role ="button" asp-controller="Usuario" asp-action="Create">Criar novo usuário</a>
+
+    </div>
+
+    <br/>
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+    <br/>
+    <h1 class="display-4">Listagem de Usuários</h1>
+    <div class="table-responsive">
+        <table class="table table-hover" id="table-usuarios">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Login</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Perfil</th>
+                    <th scope="col">Total de Contatos</th>
+                    <th scope="col">Data de Cadastro</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    int contador = 0;
+                    foreach (UsuarioModel user in Model)
+                    {
+                        contador++;
+                        <tr>
+                            <th scope="row">@contador</th>
+                            <td>@user.Nome</td>
+                            <td>@user.Login</td>
+                            <td>@user.Email</td>
+                            <td>@user.Perfil</td>
+                            <td>
+                                <a href="#" usuario-id="@user.Id" class="btn btn-success btn-sm btn-total-contatos" data-toggle="modal" data-target="#modalContatosUser">
+                                    @(user.Contatos != null && user.Contatos.Any() ? user.Contatos.Count() : 0)
+                                </a>
+                            </td>
+                            <td>@user.DataCadastro</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a role="button" class="btn btn-primary" asp-route-id="@user.Id" asp-controller="Usuario" asp-action="Edit">Editar</a>
+                                    <a role="button" class="btn btn-danger" asp-route-id="@user.Id" asp-controller="Usuario" asp-action="DeleteConfirm">Apagar</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr class="odd"><td valign="top" colspan="5">Nenhum Usuário encontrado</td></tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+   
+
+    <div id="modalContatosUser" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document"  >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Listagem de Contatos</h5>
+                    <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div id="listaContatosUsuario">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

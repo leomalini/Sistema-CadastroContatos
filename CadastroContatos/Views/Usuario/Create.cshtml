@@ -1,0 +1,52 @@
+﻿@using CadastroContatos.Enums
+@model UsuarioModel
+@{
+    ViewData["Title"] = "Criar Usuário";
+}
+<div class="text-center">
+
+    <h1 class="display-4">Cadastrar Usuário</h1>
+
+    
+
+</div>
+
+<form asp-controller="Usuario" asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label for="Nome" class="form-label">Nome</label>
+        <input type="text" asp-for="Nome" class="form-control" id="nome" placeholder="Digite o Nome de Usuário">
+        @Html.ValidationMessageFor(x => x.Nome)
+    </div>
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email</label>
+        <input type="email" asp-for="Email" class="form-control" id="email" placeholder="Digite o Email do Usuário">
+        @Html.ValidationMessageFor(x => x.Email)
+    </div>
+    <div class="mb-3">
+        <label for="Login" class="form-label">Login</label>
+        <input type="text" asp-for="Login" class="form-control" id="celular" placeholder="Digite o Login do Usuário">
+        @Html.ValidationMessageFor(x => x.Login)
+    </div>
+    <div class="mb-3">
+        <label for="Perfil" class="form-label">Perfil</label>
+        <select asp-for="Perfil" class="form-control">
+            <option value ="">Selecione</option>
+            <option value ="@PerfilEnum.Admin">Administrador</option>
+            <option value="@PerfilEnum.Padrao">Padrão</option>
+        </select>
+        @Html.ValidationMessageFor(x => x.Perfil)
+
+    </div>
+    <div class="mb-3">
+        <label for="Senha" class="form-label">Senha</label>
+        <input type="password" asp-for="Senha" class="form-control" id="celular" placeholder="Digite a Senha do Usuário">
+        @Html.ValidationMessageFor(x => x.Senha)
+    </div>
+    @* <h6 class="mb-3" hidden asp-for="Status">@Model.Status</h6> *@
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-success btn-block">Adicionar</button>
+        <a class="btn btn-secondary btn-block" asp-controller="Usuario" asp-action="Index" role="button">Voltar</a>
+    </div>
+
+</form>
