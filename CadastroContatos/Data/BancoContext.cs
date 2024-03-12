@@ -19,15 +19,5 @@ namespace CadastroContatos.Data
             modelBuilder.ApplyConfiguration(new ContatoMap());
             base.OnModelCreating(modelBuilder);
         }
-        public class YourDbContextFactory : IDesignTimeDbContextFactory<DbContext>
-        {
-            public DbContext CreateDbContext(string[] args)
-            {
-                var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
-                optionsBuilder.UseSqlServer("Server=DESKTOP-LEONARD;Database=master;Trusted_Connection=True;TrustServerCertificate=True;Encrypt=false;User Id=sa;Password=Vasco123!");
-
-                return new DbContext(optionsBuilder.Options);
-            }
-        }
     }
 }
