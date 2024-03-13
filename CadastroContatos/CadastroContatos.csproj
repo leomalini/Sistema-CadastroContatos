@@ -22,4 +22,6 @@
     <Content Update="appsettings*.json" CopyToPublishDirectory="Never" />
 </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
 </Project>
