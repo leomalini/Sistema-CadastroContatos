@@ -62,10 +62,10 @@ dlldata.c
 BenchmarkDotNet.Artifacts/
 
 # .NET
-appsettings.json
 project.lock.json
 project.fragment.lock.json
 artifacts/
+appsettings.json
 
 # Tye
 .tye/
